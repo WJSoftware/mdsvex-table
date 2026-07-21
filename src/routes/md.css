@@ -1,0 +1,25 @@
+[data-mdsvex-table="table"], table {
+    background-color: rgb(39, 20, 20);
+}
+
+[data-mdsvex-table="tr"] {
+    padding: 1em;
+    /* border-bottom: 1px solid red; */
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+[data-mdsvex-table="th"] {
+    font-weight: bold;
+    background-color: rgb(59, 30, 30);
+
+    &::after {
+        content: ":";
+    }
+}
+
+[data-mdsvex-table="td"] {
+    background-color: rgb(86, 37, 37);
+}
