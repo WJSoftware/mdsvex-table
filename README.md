@@ -26,7 +26,7 @@
             tr,
             th,
             td
-        } from 'mdsvex-table'
+        } from 'mdsvex-table';
     </script>
     ```
 4. Still in the layout, create the table context:

@@ -43,9 +43,9 @@
     {#if containerCtx.type === 'header'}
         {@render headerRow?.()}
     {:else}
-        <dl>
+        <dl role="list">
             {#each ctx.children as cell, idx (idx)}
-                <dt>
+                <dt role="listitem">
                     <div data-mdsvex-table="th">
                         {@render headerContent(idx)}
                     </div>

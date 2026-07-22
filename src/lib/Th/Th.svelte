@@ -14,7 +14,7 @@
 {#if tableCtx.mq.current}
     <RsTh {children} />
 {:else}
-    <th {...restProps}>
+    <th scope="col" {...restProps}>
         {@render children?.()}
     </th>
 {/if}

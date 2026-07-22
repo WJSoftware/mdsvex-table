@@ -1,5 +1,5 @@
 <script lang="ts" module>
-    export { table, thead, tbody, tr, th, td } from '$lib/index-table.js';
+    export { table, thead, tbody, tr, th, td } from '$lib/index.js';
 </script>
 <script lang="ts">
     import { setTableContext, TableContext } from "$lib/table-context.svelte.js";
