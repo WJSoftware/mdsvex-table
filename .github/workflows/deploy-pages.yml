@@ -1,0 +1,21 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/deploy-pages.yml'
+      - 'vite.config.js'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    uses: WJSoftware/cicd/.github/workflows/build-and-deploy-pages.yml@main
+    with:
+      target_branch: Pages
+      project_folder: ./
+      output_folder: build
