@@ -8,17 +8,17 @@
     ```bash
     npm install mdsvex-table
     ```
-2. If you don't have an MDSvex layout component configured, add one:
+2. If you don't have an MDsveX layout component configured, add one:
     ```ts
         preprocess: [mdsvex({
             extensions: ['.svx', '.md'],
             layout: join(__dirname, './src/routes/MdLayout.svelte') // Or whatever you wish
         })],
     ```
-3. Re-export all table components from `mdsvex-table` in the layout(s) component(s) as per MDSvex's instructions:
+3. Re-export all table components in `mdsvex-table` from the layout(s) component(s) as per MDsveX's [instructions](https://mdsvex.pngwn.io/docs#layout):
     ```svelte
     <script lang="ts" module>
-        // export * ... doesn't work. :-(
+        // export * ... doesn't work. 😢
         export {
             table,
             thead,
