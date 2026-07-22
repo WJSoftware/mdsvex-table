@@ -19,3 +19,4 @@ jobs:
       target_branch: Pages
       project_folder: ./
       output_folder: build
+      environment: Production
