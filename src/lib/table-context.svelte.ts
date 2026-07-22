@@ -12,18 +12,21 @@ export class TableContext {
     mq: MediaQuery;
     header: ContainerContext | undefined;
     body: ContainerContext | undefined;
+    breakpoint: number | string | (() => string);
+    
     constructor(options?: TableContextOptions) {
         const { breakpoint, ssrBehavior = 'table' } = {
             ...defaultContextOptions,
             ...options
         };
+        this.breakpoint = $state(breakpoint);
         const ssr = ssrBehavior === 'list' ? true : false;
         this.mq = $derived.by(() => {
-            const bp = typeof breakpoint === 'number' ?
-                breakpoint + 'px' :
-                typeof breakpoint === 'string' ? breakpoint
+            const bp = typeof this.breakpoint === 'number' ?
+                this.breakpoint + 'px' :
+                typeof this.breakpoint === 'string' ? this.breakpoint
                     : undefined;
-            const query = typeof breakpoint === 'function' ? breakpoint() : `(max-width: ${bp})`;
+            const query = typeof this.breakpoint === 'function' ? this.breakpoint() : `(max-width: ${bp})`;
             return new MediaQuery(query, ssr);
         });
     }
