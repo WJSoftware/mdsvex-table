@@ -1,0 +1,22 @@
+name: Test
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - '.npmrc'
+      - '.prettierignore'
+      - 'prettier.config.js'
+      - '.github/**'
+      - '.gitignore'
+      - 'LICENSE'
+      - 'README.md'
+
+jobs:
+  test:
+    uses: WJSoftware/cicd/.github/workflows/npm-test.yml@main
+    with:
+      node-version: 24
+      build-script: build
+      test-script: "test:ci"
+      build: false
