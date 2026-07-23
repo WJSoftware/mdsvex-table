@@ -32,7 +32,8 @@
   "files": [
     "dist",
     "!dist/**/*.test.*",
-    "!dist/**/*.spec.*"
+    "!dist/**/*.spec.*",
+    "!dist/**/tests/**"
   ],
   "sideEffects": [
     "**/*.css"
