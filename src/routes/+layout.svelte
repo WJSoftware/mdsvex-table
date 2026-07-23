@@ -3,18 +3,8 @@
     import './app.css';
     import Navbar from './Navbar.svelte';
 
-    type Props = LayoutProps & {
-        title?: string;
-        description?: string;
-    }
-
-    let { title, description, children }: Props = $props();
+    let { children }: LayoutProps = $props();
 </script>
-
-<svelte:head>
-    <title>{title || 'mdsvex-table'}</title>
-    <meta name="description" content={description || 'mdsvex-table'} />
-</svelte:head>
 
 <Navbar />
 <div class="container">

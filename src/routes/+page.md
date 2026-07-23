@@ -5,18 +5,33 @@
 ---
 
 <script>
-  import { CirclePlus } from '@lucide/svelte';
+  import { Lightbulb, TriangleAlert } from '@lucide/svelte';
 </script>
 
 # {title}
 
-This is a Svelte v5 NPM package that provides replacement Svelte components for the necessary HTML elements that compose a table: `table`, `thead`, `tbody`, `tr`, `th` and `td`.  These are the ones that can be generated out of a Markdown table.  Replacements for `caption` and `tfooter` are not provided.  The components are designed to exchange the table markup with list markup (not `ul/ol`, but a list of containers) that can be read better in small devices.  In other words:  Transforms table to a vertical list of card-like items.
+This is a Svelte v5 NPM package that provides replacement Svelte components for building tables: `table`, `thead`, `tbody`, `tr`, `th` and `td`.  These are the ones that can be generated out of a Markdown table.  Replacements for `caption` and `tfooter` are not provided because table captions and footers cannot be specified in markup.
+
+> **<Lightbulb /> Do you need captions or table footers?**
+>
+> [Place an issue](https://github.com/WJSoftware/mdsvex-table/issues/new) requesting them.  Please provide your use case for justification.
+
+The components are designed to exchange the table markup with list markup (not `ul/ol`, but a list of containers) that can be read better in small devices.  In other words:  Transforms tables to vertical lists of card-like items.
+
+## Features
+
+- Fully automatic once the table context has been set
+- Configurable breakpoint
+- Configurable SSR default
+- Reactive table context properties for more complex scenarios
+- Can be fully styled
+- The list version is still announced as a table by screen readers
 
 ## How It Works
 
 Since this is a component meant to replace Markdown-generated tables, it doesn't rely on component properties.  Instead, configuration and all interconnection between the various table components is done through context.
 
-We also don't use the components directly under normal circumstances.  Instead, we configure a layout component in *MDsveX* and follow their instructions on how to export all the table-related components.
+We also don't use the components directly under normal circumstances.  Instead, we configure a layout component in *MDsveX* and follow [their instructions](https://mdsvex.pngwn.io/docs#layout) on how to export all the table-related components.
 
 We finally initialize the whole thing by creating the "root" table context that will apply to all tables in the Markdown document.
 
@@ -93,6 +108,8 @@ For #1 above, ask an AI and you shall receive recommendations:
 | **ua-parser-modern** | TypeScript-native, modular functions (``parseBrowser``, ``parseOS``, etc.). Compatible with modern bundlers (Vite, Rollup, esbuild). Handles tricky cases like Brave spoofing Chrome. | Ideal for TypeScript projects or modern toolchains. |
 | **browser-dtector** | Simple API, supports both Node.js and browser. Returns parsed info including platform, version, and flags (``isMobile``, ``isDesktop``, etc.). | Quick detection with minimal setup, good for middleware. |
 
-**IMPORTANT:** I did not sanitize the recommendations, so do that yourself and [tell us about it](https://github.com/WJSoftware/mdsvex-table/discussions) if you like.
+> **<TriangleAlert /> Recommendations Not Sanitized**
+>
+> The recommendations were copied directly from the AI response without verification, so verify them yourself and maybe [tell us about it](https://github.com/WJSoftware/mdsvex-table/discussions) if you like or feel the need.
 
 As for #2, remember to use [`<svelte:window>`](https://svelte.dev/docs/svelte/svelte-window) to keep the cookie reactively up-to-date.

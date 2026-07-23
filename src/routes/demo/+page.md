@@ -7,8 +7,6 @@
 <script lang="ts">
     import type { PageProps } from './$types';
     import { mdTableContext } from '../md-table-context.js';
-
-    console.log('Retrieving table context...');
 </script>
 
 # {title}

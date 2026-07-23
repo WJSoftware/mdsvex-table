@@ -33,7 +33,7 @@
                     class="navbar-item"
                     href={resolve('/demo')}
                 >
-                    Examples
+                    Demonstration
                 </a>
             </div>
             <div class="navbar-end">
