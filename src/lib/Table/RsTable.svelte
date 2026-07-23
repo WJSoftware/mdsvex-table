@@ -13,6 +13,6 @@
     const tableCtx = tableContext();
 </script>
 
-<div class="mdsvex-table" role="table" data-mdsvex-table="table" aria-rowcount={tableCtx.body?.rows.length}>
+<div role="table" data-mdsvex-table="table" aria-rowcount={tableCtx.body?.rows.length}>
     {@render children?.()}
 </div>
