@@ -4,13 +4,13 @@ import { render } from 'vitest-browser-svelte';
 import type { TableContextOptions } from '$lib/types.js';
 import Layout from '$lib/tests/Layout.svelte';
 import type { BrowserPage, Locator } from 'vitest/browser';
-import type { Component } from 'svelte';
+import type { Snippet } from 'svelte';
 
 type TestOptions = {
     renderAsText: string;
     locator: (page: BrowserPage) => Locator;
     expectedTagName: string;
-    children?: Component;
+    children?: Snippet;
 };
 
 export function breakpointTests(options: [TestOptions, TestOptions]) {
