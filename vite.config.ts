@@ -6,7 +6,6 @@ import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 
 export default defineConfig(({ mode }) => {
-	console.log('Vite config mode:', mode);
 	return {
 		plugins: [
 			sveltekit({
