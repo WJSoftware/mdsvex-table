@@ -10,7 +10,5 @@
 
     const rowCtx = rowContext();
     // svelte-ignore state_referenced_locally
-    if (children) {
-        rowCtx.children.push(children);
-    }
+    rowCtx.children.push(children);
 </script>

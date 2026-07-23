@@ -1,6 +1,6 @@
 import { describe } from 'vitest';
 import { breakpointTests } from '$lib/tests/breakpoint-tests.js';
-import Children1Col from '$lib/tests/Children1Col.svelte';
+import { children1Col } from '$lib/tests/TestSnippets.svelte';
 
 describe(
     'Thead',
@@ -9,20 +9,26 @@ describe(
             expectedTagName: 'thead',
             renderAsText: 'a header row group',
             locator: (page) =>
-                page.getByRole('rowgroup').all().find(locator => { 
-                    return locator.element().tagName.toLowerCase() === 'thead';
-                })!,
-            children: Children1Col
+                page
+                    .getByRole('rowgroup')
+                    .all()
+                    .find((locator) => {
+                        return locator.element().tagName.toLowerCase() === 'thead';
+                    })!,
+            children: children1Col,
         },
         {
             expectedTagName: 'div',
             renderAsText: 'a div',
             locator: (page) =>
-                page.getByRole('rowgroup').all().find(locator => { 
-                    const el = locator.element();
-                    return el.tagName.toLowerCase() === 'div' && el.getAttribute('data-mdsvex-table') === 'thead';
-                })!,
-            children: Children1Col
-        }
-    ])
+                page
+                    .getByRole('rowgroup')
+                    .all()
+                    .find((locator) => {
+                        const el = locator.element();
+                        return el.tagName.toLowerCase() === 'div' && el.getAttribute('data-mdsvex-table') === 'thead';
+                    })!,
+            children: children1Col,
+        },
+    ]),
 );

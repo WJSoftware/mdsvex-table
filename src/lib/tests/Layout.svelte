@@ -8,7 +8,7 @@
     import type { Snippet } from 'svelte';
 
     type Props = {
-        tableCtx: TableContext;
+        tableCtx?: TableContext;
         ctxOptions?: TableContextOptions
         children?: Snippet;
     };
