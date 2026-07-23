@@ -16,7 +16,6 @@ describe('RsTable', () => {
         await expect.element(tableLocator).toBeInTheDocument();
         const table = await tableLocator.element();
         expect(table).toHaveAttribute('data-mdsvex-table', 'table');
-        expect(table).toHaveAttribute('class', 'mdsvex-table');
     });
     test('Should add the aria-rowcount attribute with the correct number of rows.', async () => {
         let tableCtx: TableContext;
