@@ -7,10 +7,12 @@
 </script>
 
 <script lang="ts">
-    import { setTableContext, TableContext } from '$lib/table-context.svelte.js';
     import type { Snippet } from 'svelte';
     import './md.css';
-    import { setMdTableContext } from './md-table-context.js';
+    import { CircleSlash2 } from '@lucide/svelte';
+    import { mdTableContext } from './md-table-context.js';
+    import { setTableContext } from '$lib/table-context.svelte.js';
+    import { emptyContentContext } from './empty-content-context.svelte.js';
 
     type Props = {
         title?: string;
@@ -19,10 +21,18 @@
     };
 
     let { title, description, children }: Props = $props();
+    const tableCtx = mdTableContext();
+    setTableContext(tableCtx);
+    const emptyCtx = emptyContentContext();
 
-    const tableCtx = setTableContext(new TableContext());
-    setMdTableContext(tableCtx);
+    $effect(() =>{
+        tableCtx.emptyCellContent = emptyCtx.useEmptyContent ? emptyCell : undefined;
+    });
 </script>
+
+{#snippet emptyCell()}
+    <CircleSlash2 size="1em" />
+{/snippet}
 
 <svelte:head>
     <title>{title ?? 'mdsvex-table'}</title>
@@ -32,4 +42,6 @@
     />
 </svelte:head>
 
-{@render children?.()}
+<article>
+    {@render children?.()}
+</article>
