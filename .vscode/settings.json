@@ -3,5 +3,6 @@
         "aria-rowcount",
         "mdsvex",
         "viewports"
-    ]
+    ],
+    "js/ts.experimental.useTsgo": false
 }
