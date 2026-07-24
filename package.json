@@ -1,6 +1,6 @@
 {
   "name": "mdsvex-table",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Table component for mdsvex Markdown that responsively switches to list on small screens.",
   "author": {
     "name": "José Pablo Ramírez Vargas",
