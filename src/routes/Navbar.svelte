@@ -1,5 +1,6 @@
 <script lang="ts">
     import { resolve } from '$app/paths';
+    import ExternalLink from './ExternalLink.svelte';
 
     let menuIsActive = $state(false);
 </script>
@@ -37,11 +38,11 @@
                 </a>
             </div>
             <div class="navbar-end">
-                <a href="https://mdsvex.pngwn.io/" class="navbar-item">
+                <ExternalLink noIcon href="https://mdsvex.pngwn.io/" class="navbar-item">
                     MDsveX
-                </a>
+                </ExternalLink>
                 <div class="navbar-item">
-                    <a
+                    <ExternalLink noIcon
                         class="button is-black"
                         href="https://github.com/WJSoftware/mdsvex-table"
                     >
@@ -50,7 +51,7 @@
                             alt="github"
                             style="width: 1.1em; height: 1.1em;"
                         />
-                    </a>
+                    </ExternalLink>
                 </div>
             </div>
         </div>
