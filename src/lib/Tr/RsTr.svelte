@@ -35,6 +35,14 @@
     {/each}
 {/snippet}
 
+{#snippet emptyCellContent()}
+    {#if typeof tableCtx.emptyCellContent === 'string'}
+        {tableCtx.emptyCellContent}
+    {:else}
+        {@render tableCtx.emptyCellContent?.()}
+    {/if}
+{/snippet}
+
 <div
     role="row"
     data-mdsvex-table="tr"
@@ -45,21 +53,24 @@
     {:else}
         <dl role="list">
             {#each ctx.children as cell, idx (idx)}
-                <dt role="listitem">
-                    <div data-mdsvex-table="th">
-                        {@render headerContent(idx)}
-                    </div>
-                </dt>
-                <dd>
-                    <div
-                        role="cell"
-                        aria-colindex={idx + 1}
-                        aria-rowindex={rowIndex}
-                        data-mdsvex-table="td"
-                    >
-                        {@render cell?.()}
-                    </div>
-                </dd>
+                {#if cell || tableCtx.emptyCellContent}
+                    <dt role="listitem">
+                        <div data-mdsvex-table="th">
+                            {@render headerContent(idx)}
+                        </div>
+                    </dt>
+                    <dd>
+                        <div
+                            role="cell"
+                            aria-colindex={idx + 1}
+                            aria-rowindex={rowIndex}
+                            data-mdsvex-table="td"
+                            {...cell === undefined ? { 'data-mdsvex-table-empty': '' } : {}}
+                        >
+                            {@render (cell ?? emptyCellContent)()}
+                        </div>
+                    </dd>
+                {/if}
             {/each}
         </dl>
     {/if}

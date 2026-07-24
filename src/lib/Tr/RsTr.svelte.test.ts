@@ -3,7 +3,9 @@ import { page } from 'vitest/browser';
 import { render } from 'vitest-browser-svelte';
 import type { TableContextOptions } from '$lib/types.js';
 import Layout from '$lib/tests/Layout.svelte';
-import { children1Col, childrenEmptyCell } from '$lib/tests/TestSnippets.svelte';
+// @ts-expect-error TS2614
+import { children1Col, childrenEmptyCell, emptyContent } from '$lib/tests/TestSnippets.svelte';
+import { flushSync } from 'svelte';
 
 describe('RsTr', () => {
     test('Should render data rows as lists.', async () => {
@@ -62,20 +64,62 @@ describe('RsTr', () => {
         expect(el.getAttribute('aria-rowindex')).toBe('1');
         expect(el.getAttribute('aria-colindex')).toBe('1');
     });
-    test('#7: Should render the correct cell content when the row has one empty cell.', async () => {
-        const optionsCtx: TableContextOptions = {
-            breakpoint: window.innerWidth,
-        };
-        render(Layout, {
-            props: {
-                optionsCtx,
-                children: childrenEmptyCell,
-            },
+    describe('Empty cell content', () => {
+        test('Should not render the term element for empty cells.', async () => {
+            const optionsCtx: TableContextOptions = {
+                breakpoint: window.innerWidth,
+            };
+            render(Layout, {
+                props: {
+                    optionsCtx,
+                    children: childrenEmptyCell,
+                },
+            });
+            const els = page.getByRole('cell').all();
+            expect(els).toHaveLength(1);
+            await expect.element(els[0]).toBeInTheDocument();
         });
-        const els = page.getByRole('cell').all();
-        await expect.element(els[0].element()).toBeInTheDocument();
-        expect(els[0].element().textContent).toBe('');
-        await expect.element(els[1].element()).toBeInTheDocument();
-        expect(els[1].element().textContent).toBe('Cell 2');
+        test.each([
+            {
+                emptyCellContent: '(empty)',
+                contentType: 'string',
+            },
+            {
+                emptyCellContent: emptyContent,
+                contentType: 'snippet',
+            }
+        ])('#7: Should render the $contentType empty content on empty cells.', async ({ emptyCellContent }) => {
+            let tableCtx: TableContextOptions | undefined;
+            await render(Layout, {
+                props: {
+                    children: childrenEmptyCell,
+                    get tableCtx() { 
+                        return tableCtx;
+                    },
+                    set tableCtx(value) {
+                        tableCtx = value;
+                    }
+                },
+            });
+            /*
+            There's something different in the test environment than real browsers:  If I pass optionsCtx to initialize 
+            the context with non-default values, the TestContext constructor doesn't receive the optionsCtx object I
+            assign via the options.props property of the render() function.  It claims that "options" is undefined.
+
+            The weird thing is that all other tests work fine with the optionsCtx object passed to the render() 
+            function.  I don't know why this test is different, but I can work around it by setting the context values
+            after the render() function is called.
+            */
+            tableCtx!.breakpoint = window.innerWidth;
+            tableCtx!.emptyCellContent = emptyCellContent;
+            flushSync();
+            const els = page.getByRole('cell').all();
+            expect(els).toHaveLength(2);
+            await expect.element(els[0]).toBeInTheDocument();
+            expect(els[0].element().attributes.getNamedItem('data-mdsvex-table')?.value).toBe('td');
+            expect(els[0].element().textContent).toBe('(empty)');
+            await expect.element(els[1]).toBeInTheDocument();
+            expect(els[1].element().textContent).toBe('Cell 2');
+        });
     });
 });
