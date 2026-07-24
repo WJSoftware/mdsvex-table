@@ -26,6 +26,7 @@ The components are designed to exchange the table markup with list markup (not `
 - Reactive table context properties for more complex scenarios
 - Can be fully styled
 - The list version is still announced as a table by screen readers
+- Empty content:  Rows with empty cells have that term/definition pair removed, unless custom empty content is specified
 
 ## How It Works
 
@@ -61,7 +62,8 @@ These would be the additions to the layout component:
 | Option | Type | Default | Description |
 | - | - | - | - |
 | `breakpoint` | `string \| number \| (() => string)` | `576` | The breakpoint at which the list format kicks in.  If it is a number, it is assumed to be in pixels; if it is a string (such as `'25rem'`) then it is given as-is to the media query; if it is a function, it must return the entire media query. |
-| `ssrBehavior` | `"list" \| "table"` | `'table'` | For Sveltekit and SSR-rendered implementations, it determines how the table will be rendered.
+| `ssrBehavior` | `"list" \| "table"` | `'table'` | For Sveltekit and SSR-rendered implementations, it determines how the table will be rendered. |
+| `emptyCellContent` | `string \| Snippet \| undefined` | `undefined` | Sets content to be displayed on empty cells.  If left undefined, then the term/definition pair for that cell is removed from markup. |
 
 ## Styling
 
